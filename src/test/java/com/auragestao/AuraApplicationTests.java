@@ -1,4 +1,4 @@
-package com.auragestao.aura;
+package com.auragestao;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
