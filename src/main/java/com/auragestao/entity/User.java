@@ -2,6 +2,7 @@ package com.auragestao.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Generated;
 
 import java.time.LocalDateTime;
 
@@ -22,9 +23,11 @@ public class User {
     @Column(nullable = false, length = 14)
     private String cpf;
 
+    @Generated
     @Column(name="created_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Generated
     @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 
