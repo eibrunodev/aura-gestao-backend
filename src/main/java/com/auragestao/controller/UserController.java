@@ -4,6 +4,8 @@ import com.auragestao.entity.User;
 import com.auragestao.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -18,4 +20,15 @@ public class UserController {
     public User createUser(@RequestBody User user){
         return userService.createUser(user);
     }
+
+    @GetMapping
+    public List<User> userListAll(){
+        return userService.findAllUsers();
+    }
+
+    @GetMapping("/{id}")
+    public User searchID(@PathVariable Long id) {
+        return userService.findUserById(id);
+    }
+
 }
