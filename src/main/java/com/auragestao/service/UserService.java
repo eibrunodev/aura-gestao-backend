@@ -31,4 +31,21 @@ public class UserService {
                         "Usuario não encontrado"
                 ));
     }
+
+    public User updateUser(Long id, User user) {
+        User userExisting = findUserById(id);
+
+        userExisting.setName(user.getName());
+        userExisting.setCpf(user.getCpf());
+        userExisting.setPhone(user.getPhone());
+        userExisting.setTypeUser(user.getTypeUser());
+
+        return userRepository.save(userExisting);
+    }
+
+    public void delete( Long id ){
+        User userExisting = findUserById(id);
+
+        userRepository.delete(userExisting);
+    }
 }
