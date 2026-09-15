@@ -1,6 +1,8 @@
 package com.auragestao.controller;
 
+import com.auragestao.dto.UserRequestDTO;
 import com.auragestao.entity.User;
+import com.auragestao.mapper.UserMapper;
 import com.auragestao.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,9 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody UserRequestDTO userRequestDTO){
+        User user = UserMapper.toEntity(userRequestDTO);
+
         return userService.createUser(user);
     }
 
@@ -32,8 +36,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user){
-        return userService.updateUser(id, user );
+    public User updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+
+        User user = UserMapper.toEntity(userRequestDTO);
+
+        return userService.updateUser(id,user);
     }
 
     @DeleteMapping("/{id}")
