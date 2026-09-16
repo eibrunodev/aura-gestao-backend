@@ -1,6 +1,7 @@
 package com.auragestao.controller;
 
 import com.auragestao.dto.UserRequestDTO;
+import com.auragestao.dto.UserResponseDTO;
 import com.auragestao.entity.User;
 import com.auragestao.mapper.UserMapper;
 import com.auragestao.service.UserService;
@@ -19,28 +20,39 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO createUser(@RequestBody UserRequestDTO userRequestDTO){
         User user = UserMapper.toEntity(userRequestDTO);
 
-        return userService.createUser(user);
+        User saveUser = userService.createUser(user);
+
+        return UserMapper.toResponse(saveUser);
     }
 
     @GetMapping
-    public List<User> userListAll(){
-        return userService.findAllUsers();
+    public List<UserResponseDTO> userListAll(){
+
+        List<User> users = userService.findAllUsers();
+
+        return users.stream()
+                .map(UserMapper::toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public User searchID(@PathVariable Long id) {
-        return userService.findUserById(id);
+    public UserResponseDTO searchID(@PathVariable Long id) {
+        User user = userService.findUserById(id);
+
+        return UserMapper.toResponse(user);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
 
         User user = UserMapper.toEntity(userRequestDTO);
 
-        return userService.updateUser(id,user);
+        User updatedUser = userService.updateUser(id, user);
+
+        return UserMapper.toResponse(updatedUser);
     }
 
     @DeleteMapping("/{id}")
