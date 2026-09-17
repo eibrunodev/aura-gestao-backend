@@ -5,6 +5,7 @@ import com.auragestao.dto.UserResponseDTO;
 import com.auragestao.entity.User;
 import com.auragestao.mapper.UserMapper;
 import com.auragestao.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDTO createUser(@RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO createUser( @Valid @RequestBody UserRequestDTO userRequestDTO){
         User user = UserMapper.toEntity(userRequestDTO);
 
         User saveUser = userService.createUser(user);
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO updateUser( @PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO){
 
         User user = UserMapper.toEntity(userRequestDTO);
 
