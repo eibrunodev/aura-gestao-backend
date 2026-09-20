@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: aura_gestao
+      POSTGRES_USER: aura_user
+      POSTGRES_PASSWORD: 1212
+    ports:
+      - "5432:5432"
+    volumes:
+      - aura_postgres_data:/var/lib/postgresql/data
+volumes:
+  aura_postgres_data:

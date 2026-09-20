@@ -1,1 +1,8 @@
-spring.application.name=aura
+spring:
+  application:
+    name: aura
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aura_gestao
+    username: aura_user
+    password: 1212
